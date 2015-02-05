@@ -24,7 +24,7 @@
 ##### 5. tangential speed (calibrated)                                                                                 ##### 
 ##### 6. names of your observations/rows (optional; only outputted if data entered for rownames)                       #####  
 #####                                                                                                                  #####
-##### Last modified on 2-4-15                                                                                                                 #####
+#####                                                                                                                  #####
 ############################################################################################################################
 
 CrudeSpd <- function(x, rate, calib=1, distance.scale="units", time.scale="s") {
