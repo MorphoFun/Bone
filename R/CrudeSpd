@@ -1,8 +1,8 @@
 ############################################################################################################################
-######################################## CALCULATING CRUDE SPEED FOR MULTIPLE FILES ########################################
+######################################## CALCULATING CRUDE SPEED FOR A SINGLE FILE #########################################
 #####                                                                                                                  #####
 ##### CrudeSpd is used to calculate a crude estimate of speed, whereby speed is calculated based on the                #####
-#####   distance traveled over a given time.  The assumption is that matrices of X,Y coordinates are entered and       #####
+#####   distance traveled over a given time.  The assumption is that a matrix of X,Y coordinates are entered and       #####
 #####   distance is calculated based on the first and last row of these matrices.                                      #####
 #####                                                                                                                  #####
 ##### - x = 2-column matrix that contain X-coordinates in column 1 and Y-coordinates in column 2                       #####
