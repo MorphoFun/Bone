@@ -14,7 +14,7 @@
 ##### - time.scale = character string of the units of time. Default is seconds ("s")                                   #####
 ##### - rownames = vector of character strings that you want to use to name the rows (e.g., trial #)                   #####
 #####                                                                                                                  #####
-##### Note: If you are only evaluating one trial, use Crude.Spd() instead                                              #####    
+##### Note: If you are only evaluating one trial, use CrudeSpd() instead                                              #####    
 #####                                                                                                                  #####
 ##### This function will output:                                                                                       #####
 ##### 1. time elapsed                                                                                                  #####
