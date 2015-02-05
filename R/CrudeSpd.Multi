@@ -1,0 +1,47 @@
+############################################################################################################################
+######################################## CALCULATING CRUDE SPEED FOR MULTIPLE FILES ########################################
+#####                                                                                                                  #####
+##### CrudeSpd.Multi is used to calculated a crude estimate of speed, whereby speed is calculated based on the         #####
+#####   distance traveled over a given time.  The assumption is that matrices of X,Y coordinates are entered and       #####
+#####   distance is calculated based on the first and last row of these matrices.                                      #####
+#####                                                                                                                  #####
+##### - x = list of 2-column matrices that contain X-coordinates in column 1 and Y-coordinates in column 2             #####
+##### - rate = filming rate in units of frames per second                                                              #####
+##### - calib = vector of values to calibrate the X,Y coordinate data from units of pixels to another unit             #####
+#####   (e.g., cm, mm); if no vector is provided, output will not be calibrated and will remain in the                 #####
+#####   original units used                                                                                            #####
+##### - distance.scale = character string of the units of measure related to distance traveled                         #####
+##### - time.scale = character string of the units of time. Default is seconds ("s")                                   #####
+##### - rownames = vector of character strings that you want to use to name the rows (e.g., trial #)                   #####
+#####                                                                                                                  #####
+##### Note: If you are only evaluating one trial, use Crude.Spd() instead                                              #####    
+#####                                                                                                                  #####
+##### This function will output:                                                                                       #####
+##### 1. time elapsed                                                                                                  #####
+##### 2. distance traveled (uncalibrated)                                                                              #####
+##### 3. distance traveled (calibrated)                                                                                #####
+##### 4. tangential velocity (calibrated)                                                                              #####  
+##### 5. tangential speed (calibrated)                                                                                 ##### 
+##### 6. names of your observations/rows (optional; only outputted if data entered for rownames)                       #####  
+#####                                                                                                                  #####
+##### Last modified on 2-4-15                                                                                                                 #####
+############################################################################################################################
+
+CrudeSpd.Multi <- function(x, rate, calib=1, distance.scale="units", time.scale="s", rownames=NULL) {
+	xy <- matrix(NA, length(x), 5)
+	for (n in 1:length(x)) {
+		xy[n,1] <- nrow(x[[n]])*(1/rate)		
+		xy[n,2] <- sqrt(((x[[n]][nrow(x[[n]]),1]-x[[n]][1,1])^2)+((x[[n]][nrow(x[[n]]),2]-x[[n]][1,2])^2))		
+		ifelse(length(calib)>1, xy[n,3] <- xy[n,2]/calib[n], xy[,3] <- xy[,2]/calib)
+		xy[n,4] <- xy[n,3]/xy[n,1]
+		xy[n,5] <- abs(xy[n,4])
+	}
+	xy <- data.frame(xy)
+	names(xy) <- c(paste("Time",time.scale, sep="."), "Distance.Uncalib", paste("Distance",distance.scale,sep="."), 
+								 paste("Velocity",distance.scale,time.scale, sep="."), paste("Speed",distance.scale,time.scale, sep="."))
+	if (length(rownames)>0) {
+		xy$Names <- rownames
+	}
+	return(xy)
+}
+
