@@ -38,7 +38,7 @@ CrudeSpd.Multi <- function(x, rate, calib=1, distance.scale="units", time.scale=
 	}
 	xy <- data.frame(xy)
 	names(xy) <- c(paste("Time",time.scale, sep="."), "Distance.Uncalib", paste("Distance",distance.scale,sep="."), 
-								 paste("Velocity",distance.scale,time.scale, sep="."), paste("Speed",distance.scale,time.scale, sep="."))
+			paste("Velocity",distance.scale,time.scale, sep="."), paste("Speed",distance.scale,time.scale, sep="."))
 	if (length(rownames)>0) {
 		xy$Names <- rownames
 	}
